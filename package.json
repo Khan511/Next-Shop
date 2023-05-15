@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "develop": "strapi develop",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --hostname ::",
     "lint": "next lint"
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
+    "cookie": "^0.5.0",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.2",
     "next": "13.3.2",

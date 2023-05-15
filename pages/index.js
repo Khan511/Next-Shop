@@ -1,22 +1,27 @@
-import Title from "@component/components/Title";
-import Head from "next/head";
+// Fetch products on server side index.js(in getStaticProps)
+import Navbar from "@component/components/navbar";
+import Page from "@component/components/page";
+import ProductCard from "@component/components/productCard";
+import { getProducts } from "@component/lib/helper";
 
-export default function HomePage() {
+export async function getStaticProps() {
+  const products = await getProducts();
+  return {
+    props: { products },
+  };
+}
+export default function HomePage({ products }) {
   return (
-    <>
-      <Head>
-        <title>Next Shop</title>
-      </Head>
-      <main className="px-6 py-4">
-        <Title>Next Shop</Title>
-        <p className="px-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-          distinctio laudantium facere cum maiores, magni repellat, ipsum
-          eligendi sint accusantium fugiat et vitae in officia! Dolorum pariatur
-          ipsam omnis labore nulla eum dolor esse architecto dolore fugit hic
-          id, ea nam. Ut non cumque veritatis! Placeat fugiat quo minus laborum.
-        </p>
-      </main>
-    </>
+    <Page title="Indoor Plants">
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-5  lg:grid-cols-3">
+        {products.map((product) => {
+          return (
+            <li key={product.id}>
+              <ProductCard product={product} />
+            </li>
+          );
+        })}
+      </ul>
+    </Page>
   );
 }
